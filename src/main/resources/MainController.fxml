@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1024.0" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.haagensoftware.conticious.local.controllers.MainController">
+  <children>
+    <SplitPane dividerPositions="0.4396984924623116" focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="800.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane maxHeight="150.0" minHeight="150.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <children>
+            <Label layoutX="17.0" layoutY="15.0" prefWidth="570.0" text="Path to where you want your data to be stored" />
+            <TextField fx:id="dataDirTextField" editable="false" layoutY="30.0" prefWidth="481.0" promptText="Path to LevelDB Data" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="86.0" />
+            <Button layoutY="31.0" mnemonicParsing="false" onAction="#chooseDataDirectory" text="Browse" AnchorPane.rightAnchor="11.0" />
+            <Label layoutX="14.0" layoutY="57.0" prefWidth="570.0" text="Port" />
+            <TextField fx:id="portTextField" layoutX="35.0" layoutY="73.0" prefWidth="67.0" text="8080" />
+            <Button fx:id="startButton" layoutX="14.0" layoutY="107.0" mnemonicParsing="false" onAction="#startWebapp" text="Start" />
+            <Button fx:id="stopButton" layoutX="68.0" layoutY="107.0" mnemonicParsing="false" onAction="#stopWebapp" text="Stop" />
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1024.0">
+          <children>
+            <TextArea id="loggingArea" fx:id="loggingTextArea" prefHeight="800.0" prefWidth="1024.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>
