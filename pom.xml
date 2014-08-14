@@ -140,11 +140,6 @@
             <version>0.1</version>
         </dependency>
         <dependency>
-            <groupId>no.haagensoftware</groupId>
-            <artifactId>conticious-data-plugin</artifactId>
-            <version>0.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.7.3</version>

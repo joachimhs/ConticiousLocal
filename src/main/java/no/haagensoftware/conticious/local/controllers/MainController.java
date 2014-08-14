@@ -71,34 +71,42 @@ public class MainController implements Initializable {
             chooser.setInitialDirectory(sistValgteDir);
         }
 
+
         File selectedDir = chooser.showDialog(primaryStage);
         if (selectedDir != null && selectedDir.exists() && selectedDir.isDirectory()) {
             dataDirTextField.setText(selectedDir.getAbsolutePath());
             loggingTextArea.appendText("Data directory selected: " + selectedDir.getAbsolutePath() + "\n");
             loggingTextArea.appendText("Downloading documents and admin webapp\n");
-
-            URL website = null;
-            try {
-                website = new URL("http://install.conticious.com/conticious_local.zip");
-                ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-                FileOutputStream fos = new FileOutputStream(selectedDir.getAbsolutePath() + File.separatorChar + "conticious_local.zip");
-                fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            unZipIt(selectedDir.getAbsolutePath() + File.separatorChar + "conticious_local.zip", selectedDir.getAbsolutePath());
-
-
-            cantRun.setValue(false);
         } else {
             logger.info("Unable to open or create Data Directory at: " + selectedDir.getAbsolutePath());
         }
+
+        File zipFile = new File(selectedDir.getAbsolutePath() + File.separatorChar + "conticious_local.zip");
+        if (zipFile != null && zipFile.exists() && zipFile.isFile()) {
+            logger.info("Conticious is already downloaded. Skipping download and unzip");
+        } else {
+            downloadAndExtract(selectedDir);
+        }
+
+        cantRun.setValue(false);
+    }
+
+    private void downloadAndExtract(File selectedDir) {
+        URL website = null;
+        try {
+            website = new URL("http://install.conticious.com/conticious_local.zip");
+            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+            FileOutputStream fos = new FileOutputStream(selectedDir.getAbsolutePath() + File.separatorChar + "conticious_local.zip");
+            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        unZipIt(selectedDir.getAbsolutePath() + File.separatorChar + "conticious_local.zip", selectedDir.getAbsolutePath());
     }
 
     /**
